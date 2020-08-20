@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div(class='links')
+      ul
+        li
+          a(href='/admin') SHOW ALL
+        li
+          a(href = '/admin/schedule/add') ADD SCHEDULE
+    block content

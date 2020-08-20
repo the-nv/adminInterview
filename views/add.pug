@@ -1,0 +1,50 @@
+extends layout
+
+block content
+    h1 #{title}
+
+    form(method='POST' action='')
+        label(for='email') Email:
+        input#email.form-control(type='text', placeholder='abc@xyz.mn' name='email' value=(undefined===iData ? '' : iData.email))
+
+        label(for='startDate') Start Date:
+        input#startDate.form-control(type='date', name='startDate' value=(undefined===iData ? '' : iData.startDate))
+
+        label(for='startTime') Start Time:
+        input#startTime.form-control(type='time', name='startTime' value=(undefined===iData ? '' : iData.startTime))
+
+        label(for='endtDate') End Date:
+        input#endDate.form-control(type='date', name='endDate' value=(undefined===iData ? '' : iData.endDate))
+
+        label(for='endTime') End Time:
+        input#endTime.form-control(type='time', name='endTime' value=(undefined===iData ? '' : iData.endTime))
+
+        input(type='submit', value='Submit')
+    
+    if errors
+        ul
+            for error in errors
+                li!= error.msg
+    
+    if conf
+        table(style='width:100%', border='1')
+            tr
+                th ID
+                th Start Date
+                th Start Time
+                th End Date
+                th End Time
+                th Options
+
+            each val, index in data
+                tr
+                    td=val.id
+                    td=val.start.date
+                    td=val.start.time
+                    td=val.end.date
+                    td=val.end.time
+                    td
+                        form(method='POST' action='/admin/schedule/delete')
+                        input#id.form-control(type='hidden', name='id', required='true', value=val.id)
+                        
+                        input(type='submit', value='Delete')

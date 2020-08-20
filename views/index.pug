@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1= title
+  
+  if error
+    p Error
+  else
+    table(style='width:100%', border='1')
+      tr
+        th ID
+        th IntervieweeId
+        th Start Date
+        th Start Time
+        th End Date
+        th End Time
+        th Completed
+        th Options
+
+      each val, index in data
+        tr
+          td=val.id
+          td=val.email
+          td=val.start.date
+          td=val.start.time
+          td=val.end.date
+          td=val.end.time
+          td=val.completed
+          td
+            form(method='POST' action='/admin/schedule/delete')
+              input#id.form-control(type='hidden', name='id', required='true', value=val.id)
+            
+              input(type='submit', value='Delete')
